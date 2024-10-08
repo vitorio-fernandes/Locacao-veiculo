@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.locacao.upe.Enum.Papel;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -15,29 +16,38 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Table(name = "TB_USUARIO")
 public class Usuario {
   
   @Id
   @GeneratedValue
-  UUID id;
+  private UUID id;
 
   @NotBlank
-  String nome;
+  private String nome;
   
   @Email
   @NotBlank
-  String email;
+  @Column(unique = true)
+  private String email;
 
   @Enumerated(EnumType.STRING)
-  Papel papel;
+  private Papel papel;
 
-  @OneToMany(mappedBy = "Usuario")
-  List<Reserva> reservas;
+  @OneToMany(mappedBy = "usuario")
+  private List<Reserva> reservas;
+
+  public Usuario(@NotBlank String nome, @Email @NotBlank String email, Papel papel) {
+    this.nome = nome;
+    this.email = email;
+    this.papel = papel;
+  }
   
 }

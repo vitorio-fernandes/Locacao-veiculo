@@ -16,36 +16,38 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Table(name = "TB_RESERVA")
 public class Reserva {
   @Id
   @GeneratedValue
-  UUID id;
+  private UUID id;
 
   @ManyToOne
   @JoinColumn(name = "Veiculo_id")
-  Veiculo veiculo;
+  private Veiculo veiculo;
   
   @ManyToOne
   @JoinColumn(name = "Usuario_id")
-  Usuario usuario;
+  private Usuario usuario;
 
   @NotBlank
-  LocalDate dataInicio;
+  private LocalDate dataInicio;
 
   @NotBlank
-  LocalDate dataFim;
+  private LocalDate dataFim;
 
   @NotNull
-  Double valorTotal;
+  private Double valorTotal;
 
   @Enumerated(EnumType.STRING)
-  StatusReserva statusReserva;
+  private StatusReserva statusReserva;
 
 
 }

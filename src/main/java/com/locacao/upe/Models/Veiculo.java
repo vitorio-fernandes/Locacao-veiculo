@@ -15,37 +15,39 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @Table(name = "TB_VEICULO")
 public class Veiculo {
   
   @Id
   @GeneratedValue
-  UUID id;
+  private UUID id;
 
   @NotBlank
-  String marca;
+  private String marca;
 
   @NotBlank
-  String modelo;
+  private String modelo;
 
   @NotBlank
-  String ano;
+  private String ano;
 
   @NotBlank
-  String categoria;
+  private String categoria;
 
   @NotNull
-  double tarifaDia;
+  private double tarifaDia;
   
   @Enumerated(EnumType.STRING)
-  StatusVeiculo statusVeiculo;
+  private StatusVeiculo statusVeiculo;
 
   @OneToMany(mappedBy = "Veiculo")
-  List<Reserva> reservas;
+  private List<Reserva> reservas;
 
 }
