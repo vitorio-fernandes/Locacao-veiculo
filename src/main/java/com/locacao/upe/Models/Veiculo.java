@@ -41,13 +41,23 @@ public class Veiculo {
   @NotBlank
   private String categoria;
 
+  
   @NotNull
   private double tarifaDia;
   
   @Enumerated(EnumType.STRING)
   private StatusVeiculo statusVeiculo;
-
+  
   @OneToMany(mappedBy = "Veiculo")
   private List<Reserva> reservas;
-
+  
+  public Veiculo(@NotBlank String marca, @NotBlank String modelo, @NotBlank String ano, @NotBlank String categoria,
+      @NotNull double tarifaDia, StatusVeiculo statusVeiculo) {
+    this.marca = marca;
+    this.modelo = modelo;
+    this.ano = ano;
+    this.categoria = categoria;
+    this.tarifaDia = tarifaDia;
+    this.statusVeiculo = statusVeiculo;
+  }
 }
