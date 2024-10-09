@@ -1,5 +1,11 @@
 package com.locacao.upe.Dto.Veiculo;
 
-public class VeiculoResponse {
-  
-}
+import com.locacao.upe.Enum.StatusVeiculo;
+
+public record VeiculoResponse(
+    String marca,
+    String modelo,
+    String ano,
+    String categoria,
+    double tarifaDia,
+    StatusVeiculo statusVeiculo) {}

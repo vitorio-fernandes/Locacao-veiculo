@@ -48,7 +48,7 @@ public class Veiculo {
   @Enumerated(EnumType.STRING)
   private StatusVeiculo statusVeiculo;
   
-  @OneToMany(mappedBy = "Veiculo")
+  @OneToMany(mappedBy = "veiculo")
   private List<Reserva> reservas;
   
   public Veiculo(@NotBlank String marca, @NotBlank String modelo, @NotBlank String ano, @NotBlank String categoria,

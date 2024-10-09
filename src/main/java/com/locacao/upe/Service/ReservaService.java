@@ -36,7 +36,7 @@ public class ReservaService {
     }
   }
 
-  List<Reserva> listarReservas(){
+  public List<Reserva> listarReservas(){
     return reservaRepository.findAll();
   }
 
