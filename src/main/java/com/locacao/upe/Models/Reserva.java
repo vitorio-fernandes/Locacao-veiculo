@@ -46,8 +46,18 @@ public class Reserva {
   @NotNull
   private Double valorTotal;
 
+  
   @Enumerated(EnumType.STRING)
   private StatusReserva statusReserva;
-
+  
+  public Reserva(Veiculo veiculo, Usuario usuario, @NotBlank LocalDate dataInicio, @NotBlank LocalDate dataFim,
+      @NotNull Double valorTotal, StatusReserva statusReserva) {
+    this.veiculo = veiculo;
+    this.usuario = usuario;
+    this.dataInicio = dataInicio;
+    this.dataFim = dataFim;
+    this.valorTotal = valorTotal;
+    this.statusReserva = statusReserva;
+  }
 
 }
