@@ -3,6 +3,7 @@ package com.locacao.upe.Models;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.locacao.upe.Enum.StatusReserva;
 
 import jakarta.persistence.Entity;
@@ -30,17 +31,19 @@ public class Reserva {
   private UUID id;
 
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "veiculo_id")
   private Veiculo veiculo;
   
   @ManyToOne
+  @JsonIgnore
   @JoinColumn(name = "usuario_id")
   private Usuario usuario;
 
-  @NotBlank
+  @NotNull
   private LocalDate dataInicio;
 
-  @NotBlank
+  @NotNull
   private LocalDate dataFim;
 
   @NotNull

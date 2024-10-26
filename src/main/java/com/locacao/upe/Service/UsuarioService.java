@@ -11,31 +11,39 @@ import com.locacao.upe.Dto.Usuario.UsuarioRequest;
 import com.locacao.upe.Models.Usuario;
 import com.locacao.upe.Repository.UsuarioRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UsuarioService {
-  
+
   @Autowired
   UsuarioRepository usuarioRepository;
 
-  public Usuario cadastroUsuario(UsuarioRequest request){
+  @Transactional
+  public Usuario cadastroUsuario(UsuarioRequest request) {
     Usuario usuario = new Usuario(request.nome(), request.email(), request.papel());
     return usuarioRepository.save(usuario);
   }
 
-  public List<Usuario> listarUsuarios(){
+  @Transactional
+  public List<Usuario> listarUsuarios() {
     return usuarioRepository.findAll();
   }
 
-  public Usuario atualizarUsuario(UUID id, UsuarioRequest request){
-    Usuario usuario = usuarioRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Usuário não encontrado !"));
+  @Transactional
+  public Usuario atualizarUsuario(UUID id, UsuarioRequest request) {
+    Usuario usuario = usuarioRepository.findById(id)
+        .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado !"));
     usuario.setNome(request.nome());
     usuario.setEmail(request.email());
     usuario.setPapel(request.papel());
     return usuarioRepository.save(usuario);
   }
 
-  public void deletarUsuario(UUID id){
-    Usuario usuario = usuarioRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Usuário não encontrado !"));
+  @Transactional
+  public void deletarUsuario(UUID id) {
+    Usuario usuario = usuarioRepository.findById(id)
+        .orElseThrow(() -> new NoSuchElementException("Usuário não encontrado !"));
     usuarioRepository.delete(usuario);
   }
 

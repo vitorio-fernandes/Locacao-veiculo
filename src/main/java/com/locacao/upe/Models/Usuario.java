@@ -15,6 +15,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,10 @@ public class Usuario {
   @NotBlank
   @Column(unique = true)
   private String email;
+
+  @NotBlank
+  @Size(min = 8, message = "A senha deve conter no mínimo 8 caracteres")
+  private String senha;
 
   @Enumerated(EnumType.STRING)
   private Papel papel;

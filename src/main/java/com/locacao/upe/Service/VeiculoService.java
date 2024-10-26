@@ -11,11 +11,14 @@ import com.locacao.upe.Dto.Veiculo.VeiculoRequest;
 import com.locacao.upe.Models.Veiculo;
 import com.locacao.upe.Repository.VeiculoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class VeiculoService {
   @Autowired
   VeiculoRepository veiculoRepository;
 
+  @Transactional
   public Veiculo adicionarVeiculo(VeiculoRequest request) {
     Veiculo veiculo = new Veiculo(
         request.marca(),
@@ -27,10 +30,12 @@ public class VeiculoService {
     return veiculoRepository.save(veiculo);
   }
 
+  @Transactional
   public List<Veiculo> listarVeiculos() {
     return veiculoRepository.findAll();
   }
 
+  @Transactional
   public Veiculo atualizarVeiculo(UUID id, VeiculoRequest request) {
     Veiculo veiculo = veiculoRepository.findById(id)
         .orElseThrow(() -> new NoSuchElementException("Veiculo não encontrado !"));
@@ -43,6 +48,7 @@ public class VeiculoService {
     return veiculoRepository.save(veiculo);
   }
 
+  @Transactional
   public void deletarVeiculo(UUID id) {
     Veiculo veiculo = veiculoRepository.findById(id)
         .orElseThrow(() -> new NoSuchElementException("Veiculo não encontrado !"));
