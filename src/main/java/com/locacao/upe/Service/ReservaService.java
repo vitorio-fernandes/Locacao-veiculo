@@ -41,29 +41,42 @@ public class ReservaService {
 
     validarDatas(request.dataInicio(), request.dataFim()); // Valida as datas
 
-    if (veiculo.getStatusVeiculo() == StatusVeiculo.DISPONIVEL) {
-      double valorTotal = valorTotalReserva(request.dataInicio(), request.dataFim(), veiculo.getTarifaDia());
-
-      veiculo.setStatusVeiculo(StatusVeiculo.ALUGADO);
-      veiculoRepository.save(veiculo);
-
-      Reserva reserva = new Reserva(
-          veiculo,
-          usuario,
-          request.dataInicio(),
-          request.dataFim(),
-          valorTotal,
-          StatusReserva.ATIVA);
-
-      return reservaRepository.save(reserva);
-    } else {
-      throw new IllegalStateException("Veículo não disponível para reserva.");
+    // Verifica se o veículo está disponível no período solicitado
+    if (!veiculoDisponivelParaPeriodo(veiculo, request.dataInicio(), request.dataFim())) {
+      throw new IllegalStateException("Veículo não está disponível no período solicitado.");
     }
+
+    double valorTotal = valorTotalReserva(request.dataInicio(), request.dataFim(), veiculo.getTarifaDia());
+
+    veiculo.setStatusVeiculo(StatusVeiculo.ALUGADO);
+    veiculoRepository.save(veiculo);
+
+    Reserva reserva = new Reserva(
+        veiculo,
+        usuario,
+        request.dataInicio(),
+        request.dataFim(),
+        valorTotal,
+        StatusReserva.ATIVA);
+
+    return reservaRepository.save(reserva);
   }
 
   @Transactional
   public List<Reserva> listarReservas() {
     return reservaRepository.findAll();
+  }
+
+
+  private boolean veiculoDisponivelParaPeriodo(Veiculo veiculo, LocalDate dataInicio, LocalDate dataFim) {
+    List<Reserva> reservasExistentes = reservaRepository.findByVeiculoIdAndStatusReserva(veiculo.getId(), StatusReserva.ATIVA);
+
+    for (Reserva reserva : reservasExistentes) {
+      if (!(dataFim.isBefore(reserva.getDataInicio()) || dataInicio.isAfter(reserva.getDataFim()))) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @Transactional
@@ -109,7 +122,7 @@ public class ReservaService {
 
     // Aplica desconto para mais de 7 dias de reserva
     if (dias > 7) {
-      valorTotal *= 0.95;
+      valorTotal *= 0.95; // 5% de desconto no valor total 
     }
 
     return valorTotal;

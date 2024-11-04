@@ -40,14 +40,14 @@ public class AdminController {
   @Autowired
   ReservaService reservaService;
 
-  @PostMapping("/usuario") 
-  public ResponseEntity<UsuarioResponse> cadastroUsuario(@Valid @RequestBody UsuarioRequest request) {
-    Usuario usuario = usuarioService.cadastroUsuario(request);
+  @PutMapping("/usuario") //Atualizar um usuário e seu Papel de Cliente para ADMIN ou vice versa
+  public ResponseEntity<UsuarioResponse> atualizarUsuario(@Valid @RequestBody UsuarioRequest request, UUID id){
+    Usuario usuario = usuarioService.atualizarUsuario(id, request);
     UsuarioResponse response = new UsuarioResponse(usuario.getId(), usuario.getNome(), usuario.getPapel());
     return ResponseEntity.ok(response);
   }
 
-  @PostMapping("/veiculo") 
+  @PostMapping("/veiculo") //Cadastro Veiculo no sistema   OK !
   public ResponseEntity<VeiculoResponse> cadastroVeiculo(@Valid @RequestBody VeiculoRequest request) {
     Veiculo veiculo = veiculoService.adicionarVeiculo(request);
     VeiculoResponse response = new VeiculoResponse(
@@ -61,7 +61,7 @@ public class AdminController {
     return ResponseEntity.ok(response);
   }
 
-  @GetMapping("/veiculo") // OK
+  @GetMapping("/veiculo") // Listar Veiculos OK !
   public ResponseEntity<List<VeiculoResponse>> listarVeiculos() {
     List<VeiculoResponse> response = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class AdminController {
     return ResponseEntity.ok(response);
   }
 
-  @PutMapping("/veiculo/{id}") 
+  @PutMapping("/veiculo/{id}") // Atualizar um veiculo do sistema  OK!
   public ResponseEntity<VeiculoResponse> atualizarVeiculo(@PathVariable UUID id,
       @Valid @RequestBody VeiculoRequest request) {
     Veiculo veiculo = veiculoService.atualizarVeiculo(id, request);
@@ -94,13 +94,13 @@ public class AdminController {
     return ResponseEntity.ok(response);
   }
 
-  @DeleteMapping("veiculo/{id}") 
+  @DeleteMapping("veiculo/{id}") //Deletar um Veiculo OK!
   public ResponseEntity<?> deletarVeiculo(@PathVariable UUID id) {
     veiculoService.deletarVeiculo(id);
     return ResponseEntity.ok("Veiculo Deletado com Sucesso!");
   }
 
-  @GetMapping("/reserva")
+  @GetMapping("/reserva") // Listar todas as reservas do sistema 
   public ResponseEntity<List<ReservaResponse>> listarReservas() {
     List<ReservaResponse> responseList = new ArrayList<>();
 
@@ -132,7 +132,7 @@ public class AdminController {
     return ResponseEntity.ok(responseList);
   }
 
-  @PutMapping("/reserva/{id}")
+  @PutMapping("/reserva/{id}") //Atualizar uma reserva
   public ResponseEntity<ReservaResponse> atualizarReserva(@PathVariable UUID id,
       @Valid @RequestBody ReservaRequest request) {
     Reserva reserva = reservaService.atualizarReserva(id, request);

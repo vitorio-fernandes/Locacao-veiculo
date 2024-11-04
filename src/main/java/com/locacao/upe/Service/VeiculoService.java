@@ -1,5 +1,6 @@
 package com.locacao.upe.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.locacao.upe.Dto.Veiculo.VeiculoRequest;
+import com.locacao.upe.Enum.StatusVeiculo;
 import com.locacao.upe.Models.Veiculo;
 import com.locacao.upe.Repository.VeiculoRepository;
 
@@ -33,6 +35,17 @@ public class VeiculoService {
   @Transactional
   public List<Veiculo> listarVeiculos() {
     return veiculoRepository.findAll();
+  }
+
+  @Transactional
+  public List<Veiculo> listarVeiculosDisponiveis(){
+    List<Veiculo> veiculosDisponiveis = new ArrayList<>();
+    for (Veiculo veiculo : veiculoRepository.findAll()) {
+      if(veiculo.getStatusVeiculo() == StatusVeiculo.DISPONIVEL){
+        veiculosDisponiveis.add(veiculo);
+      }
+    }
+    return veiculosDisponiveis;
   }
 
   @Transactional
