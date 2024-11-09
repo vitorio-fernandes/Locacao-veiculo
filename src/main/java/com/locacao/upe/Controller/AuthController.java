@@ -20,6 +20,7 @@ import com.locacao.upe.Dto.Usuario.UsuarioRegisterRequest;
 import com.locacao.upe.Dto.Usuario.UsuarioResponse;
 import com.locacao.upe.Models.Usuario;
 import com.locacao.upe.Repository.UsuarioRepository;
+import com.locacao.upe.Security.TokenService;
 import com.locacao.upe.Service.UsuarioService;
 
 import jakarta.validation.Valid;
@@ -37,13 +38,17 @@ public class AuthController {
   @Autowired
   UsuarioService usuarioService;
 
+  @Autowired
+  TokenService tokenService;
+
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody @Valid UsuarioLoginRequest login) {
     try {
       var usuarioSenha = new UsernamePasswordAuthenticationToken(login.email(), login.senha());
       var auth = authenticationManager.authenticate(usuarioSenha);
-      // Adicionar o Token JWT e retonar no Response Entity !
-      return ResponseEntity.ok("Usuário Logado com sucesso !");
+      var token = tokenService.gerarTokenJWT((Usuario) auth.getPrincipal());
+      
+      return ResponseEntity.status(200).body(token);
 
     } catch (BadCredentialsException e) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha incorretos!");
