@@ -33,22 +33,16 @@ Este é um projeto de sistema de gestão de locação de veículos, desenvolvido
 - **Autenticação** (`/auth`)
   - `POST /auth/login`: Realiza a autenticação do usuário e retorna um token JWT.
 
-- **Gestão de Usuários** (`/admin/users`)
-  - `GET /admin/users`: Lista todos os usuários (restrito a Admins).
-  - `PUT /admin/users/{id}`: Atualiza informações de um usuário específico (restrito a Admins).
+- **Gestão de Usuários** (`/admin/usuario`)
+  - `GET /admin/usuiario`: Lista todos os usuários (restrito a Admins).
+  - `PUT /admin/usuario/{id}`: Atualiza informações de um usuário específico (restrito a Admins).
 
 - **Gestão de Veículos** (`/vehicles`)
-  - `POST /vehicles`: Adiciona um novo veículo (restrito a Admins).
-  - `PUT /vehicles/{id}`: Atualiza os dados de um veículo (restrito a Admins).
-  - `DELETE /vehicles/{id}`: Remove um veículo do sistema (restrito a Admins).
+  - `POST /veiculo`: Adiciona um novo veículo (restrito a Admins).
+  - `PUT /veiculo/{id}`: Atualiza os dados de um veículo (restrito a Admins).
+  - `DELETE /veiculo/{id}`: Remove um veículo do sistema (restrito a Admins).
   
-- **Reservas** (`/reservas`)
-  - `POST /reservas`: Cria uma nova reserva de veículo.
-  - `GET /reservas`: Lista as reservas feitas pelo cliente autenticado.
+- **Reservas** (`/reserva`)
+  - `POST /reserva`: Cria uma nova reserva de veículo.
+  - `GET /reserva`: Lista as reservas feitas pelo cliente autenticado.
   
-## Como Executar o Projeto
-
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seuusuario/LocacaoVeiculos.git
-   cd LocacaoVeiculos
