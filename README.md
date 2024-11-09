@@ -16,7 +16,7 @@ Este é um projeto de sistema de gestão de locação de veículos, desenvolvido
 - **Spring Boot 3.3.4**
 - **Spring Security**: Implementação de autenticação JWT
 - **Maven**: Gerenciamento de dependências e build
-- **Banco de Dados**: (incluir aqui o banco de dados utilizado, se aplicável)
+- **Banco de Dados**: PostgreSql
 
 ## Estrutura do Projeto
 
