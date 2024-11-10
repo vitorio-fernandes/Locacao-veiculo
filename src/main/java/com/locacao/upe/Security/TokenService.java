@@ -1,18 +1,10 @@
 package com.locacao.upe.Security;
 
-import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-
-import javax.management.RuntimeErrorException;
-import javax.xml.crypto.AlgorithmMethod;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import org.springframework.web.filter.OncePerRequestFilter;
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
