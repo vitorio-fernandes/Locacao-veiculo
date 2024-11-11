@@ -45,7 +45,7 @@ public class AuthController {
       var auth = authenticationManager.authenticate(usuarioSenha);
       var token = tokenService.gerarTokenJWT((Usuario) auth.getPrincipal());
       
-      return ResponseEntity.status(200).body(token);
+      return ResponseEntity.ok(token);
 
     } catch (BadCredentialsException e) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha incorretos!");

@@ -11,7 +11,4 @@ UUID veiculoId,
 UUID usuarioId,
 LocalDate dataInicio,
 LocalDate dataFim
-
-
-
 ){} 

@@ -14,5 +14,4 @@ public record ReservaResponse(
   LocalDate dataInicio,
   LocalDate dataFim,
   double valorTotal
-
 ) {}
