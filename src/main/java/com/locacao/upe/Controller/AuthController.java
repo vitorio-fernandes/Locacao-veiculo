@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.locacao.upe.Dto.Usuario.UsuarioLoginRequest;
+import com.locacao.upe.Dto.Usuario.UsuarioLoginResponse;
 import com.locacao.upe.Dto.Usuario.UsuarioRegisterRequest;
 import com.locacao.upe.Dto.Usuario.UsuarioResponse;
 import com.locacao.upe.Models.Usuario;
@@ -39,16 +40,17 @@ public class AuthController {
   TokenService tokenService;
 
   @PostMapping("/login")
-  public ResponseEntity<?> login(@RequestBody @Valid UsuarioLoginRequest login) {
+  public ResponseEntity<UsuarioLoginResponse> login(@RequestBody @Valid UsuarioLoginRequest login) {
     try {
       var usuarioSenha = new UsernamePasswordAuthenticationToken(login.email(), login.senha());
       var auth = authenticationManager.authenticate(usuarioSenha);
       var token = tokenService.gerarTokenJWT((Usuario) auth.getPrincipal());
-      
-      return ResponseEntity.ok(token);
+      UsuarioLoginResponse response = new UsuarioLoginResponse(token,"Usuário logado com sucesso!");
+      return ResponseEntity.ok(response);
 
     } catch (BadCredentialsException e) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário ou senha incorretos!");
+      UsuarioLoginResponse responseError = new UsuarioLoginResponse(null,"Usuário ou senha incorretos");
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseError);
     }
   }
 

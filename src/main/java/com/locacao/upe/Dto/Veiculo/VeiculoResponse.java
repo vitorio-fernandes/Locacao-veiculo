@@ -11,5 +11,5 @@ public record VeiculoResponse(
     String ano,
     String categoria,
     double tarifaDia,
-    StatusVeiculo statusVeiculo) {
-}
+    StatusVeiculo statusVeiculo
+    ){}

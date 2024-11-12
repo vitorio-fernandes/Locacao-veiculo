@@ -11,5 +11,4 @@ public record VeiculoRequest(
     double tarifaDia,
     StatusVeiculo statusVeiculo
 
-) {
-}
+) {}
