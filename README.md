@@ -12,7 +12,7 @@ Este é um projeto de sistema de gestão de locação de veículos, desenvolvido
 
 ## Tecnologias Utilizadas
 
-- **Java 17**
+- **Java 21**
 - **Spring Boot 3.3.4**
 - **Spring Security**: Implementação de autenticação JWT
 - **Maven**: Gerenciamento de dependências e build
