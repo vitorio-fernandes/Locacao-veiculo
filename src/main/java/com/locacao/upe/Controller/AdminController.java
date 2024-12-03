@@ -47,7 +47,7 @@ public class AdminController {
     return ResponseEntity.ok(response);
   }
 
-  @PostMapping("/veiculo") //Cadastro Veiculo no sistema   OK !
+  @PostMapping("/veiculo") //Cadastro Veiculo no sistema
   public ResponseEntity<VeiculoResponse> cadastroVeiculo(@Valid @RequestBody VeiculoRequest request) {
     Veiculo veiculo = veiculoService.adicionarVeiculo(request);
     VeiculoResponse response = new VeiculoResponse(
@@ -61,7 +61,7 @@ public class AdminController {
     return ResponseEntity.ok(response);
   }
 
-  @GetMapping("/veiculo") // Listar Veiculos OK !
+  @GetMapping("/veiculo") // Listar Veiculos
   public ResponseEntity<List<VeiculoResponse>> listarVeiculos() {
     List<VeiculoResponse> response = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class AdminController {
     return ResponseEntity.ok(response);
   }
 
-  @PutMapping("/veiculo/{id}") // Atualizar um veiculo do sistema  OK!
+  @PutMapping("/veiculo/{id}") // Atualizar um veiculo do sistema
   public ResponseEntity<VeiculoResponse> atualizarVeiculo(@PathVariable UUID id,
       @Valid @RequestBody VeiculoRequest request) {
     Veiculo veiculo = veiculoService.atualizarVeiculo(id, request);
@@ -94,7 +94,7 @@ public class AdminController {
     return ResponseEntity.ok(response);
   }
 
-  @DeleteMapping("veiculo/{id}") //Deletar um Veiculo OK!
+  @DeleteMapping("veiculo/{id}") //Deletar um Veiculo
   public ResponseEntity<?> deletarVeiculo(@PathVariable UUID id) {
     veiculoService.deletarVeiculo(id);
     return ResponseEntity.ok("Veiculo Deletado com Sucesso!");
