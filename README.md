@@ -33,16 +33,16 @@ Este é um projeto de sistema de gestão de locação de veículos, desenvolvido
 - **Autenticação** (`/auth`)
   - `POST /auth/login`: Realiza a autenticação do usuário e retorna um token JWT.
 
-- **Gestão de Usuários** (`/admin/usuario`)
-  - `GET /admin/usuiario`: Lista todos os usuários (restrito a Admins).
+- **Gestão de Usuários** (`api/admin/usuario`)
+  - `GET /admin/usuario`: Lista todos os usuários (restrito a Admins).
   - `PUT /admin/usuario/{id}`: Atualiza informações de um usuário específico (restrito a Admins).
 
-- **Gestão de Veículos** (`/vehicles`)
+- **Gestão de Veículos** (`api/admin/veiculo`)
   - `POST /veiculo`: Adiciona um novo veículo (restrito a Admins).
   - `PUT /veiculo/{id}`: Atualiza os dados de um veículo (restrito a Admins).
   - `DELETE /veiculo/{id}`: Remove um veículo do sistema (restrito a Admins).
   
-- **Reservas** (`/reserva`)
+- **Reservas** (`api/cliente/reserva`)
   - `POST /reserva`: Cria uma nova reserva de veículo.
   - `GET /reserva`: Lista as reservas feitas pelo cliente autenticado.
   
